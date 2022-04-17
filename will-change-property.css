@@ -1,0 +1,13 @@
+/* The 'will-change' property in CSS optimizes animations by letting the browser 
+know which properties and elements are likely to change */
+
+.element {
+    will-change: transform;
+    /* ... */
+}
+
+.element:hover{
+    transform: scale(1.5);
+}
+
+/* Use it to fix existing performance issues rather than ones you anticipate could happen */

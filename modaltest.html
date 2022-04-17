@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+    
+        section {
+            width: 80%;
+            margin: auto;
+        }
+    
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+    
+        span {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: #b4b4b4;
+        }
+    
+        form {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        div.input {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+    
+        input {
+            color: #320654;
+            border: 3px solid rgba(239, 218, 255, 0.28);
+            ;
+            border-radius: 10px;
+            outline: none;
+            padding: 10px;
+            padding-left: 15px;
+            margin-bottom: 10px;
+        }
+    
+        input:focus {
+            border: 2px solid #320654;
+        }
+    
+        input.half-width,
+        div.shop-url {
+            width: 48%;
+        }
+    
+        input.full-width {
+            width: 100%;
+        }
+    
+        div.button {
+            text-align: center;
+        }
+    
+        .btn {
+            width: 50%;
+            margin: 10px auto;
+            padding: 10px;
+            color: #fff;
+            background-color: #eda601;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+    
+        .btn:hover {
+            background-color: #fab106;
+        }
+    
+        .url {
+            display: block;
+            color: #b4b4b4;
+            margin-bottom: 3px;
+        }
+    
+        .first {
+            margin-bottom: 15px;
+        }
+    
+        h2 {
+            color: #320654;
+            font-size: 1.5rem;
+        }
+    
+        p {
+            color: #320654;
+            font-size: 1.1rem;
+        }
+    
+        button {
+            color: #fff;
+            background-color: #320654;
+            padding: 5px 10px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+    
+        }
+    
+        div.background {
+            top: 0;
+            left: 0;
+            position: fixed;
+            background: rgba(0, 0, 0, 0.3);
+            width: 100%;
+            height: 100%;
+        }
+    
+        div.modal {
+            width: 40%;
+            margin: 300px auto;
+            height: 40vh;
+            background: #fff;
+            padding: 30px 50px;
+            text-align: center;
+        }
+    
+        @media (max-width:768px) {
+            div.input {
+                flex-direction: column;
+            }
+    
+            input.half-width,
+            div.shop-url {
+                width: 100%;
+            }
+
+            div.modal{
+                width: 80%;
+                margin: 150px auto;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+        <section>
+            <h1>Own a shop <span>Fill out the form with relevant details</span></h1>
+            <div class="row">
+                <form action="#" class="first">
+                    <div class="input">
+                        <input v-model="fname" type="text" placeholder="First Name" autofocus required class="half-width">
+                        <input v-model="lname" type="text" placeholder="Last Name" autofocus required class="half-width">
+                    </div>
+                    <div class="input">
+                        <input v-model="email" type="email" placeholder="Email" autofocus required class="half-width">
+                        <input v-model="phone" type="tel" placeholder="Phone number(optional)" autofocus required
+                            class="half-width">
+                    </div>
+                </form>
+    
+                <form action="#">
+                    <div class="input">
+                        <input v-model="sname" type="text" placeholder="Shop Name" autofocus required class="half-width">
+                        <div class="shop-url">
+                            <span class="url">Shop Url</span>
+                            <input v-model="surl" type="text" placeholder="www.com.ng/ShopName" autofocus required
+                                class="full-width">
+                        </div>
+                    </div>
+                    <div class="input">
+                        <input v-model="pcategory" type="text" placeholder="Product Category" autofocus required
+                            class="half-width">
+                        <input v-model="ptype" type="text" placeholder="Type of Product" autofocus required
+                            class="half-width">
+                    </div>
+                    <div class="input">
+                        <input v-model="pno" type="number" placeholder="No of Product" autofocus required
+                            class="half-width">
+                        <input v-model="address" type="text" placeholder="Address" autofocus required class="half-width">
+                    </div>
+                </form>
+    
+                <div class="button">
+                    <button class="btn"> <a href="modal.html">Register Now</a></button>
+                </div>
+            </div>
+        </section>
+    
+        <div class="background">
+            <div class="modal">
+                <i class="bi bi-"></i>
+                <h2>Your form has been submitted</h2>
+                <p>It will be reviewed in the next 24 hours.</p>
+                <button>Continue</button>
+            </div>
+        </div>    
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        *{
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        div.container{
+            width: 300px;
+            margin: 60px auto;
+            height: 400px;
+            padding: 50px;
+            border: 1px solid grey;
+            position: relative;
+        }
+
+        .content{
+            width: 100%;
+            margin: auto;
+            height: 100%;
+        }
+
+        .img{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+
+        .overlay{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url('johndoe.jpg');
+            background-repeat: no-repeat;
+            background-size: cover ;
+            background-position: center;
+            display: none;
+        }
+
+        .purple{
+            width:100%;
+            margin: 0;
+            height: 100%;
+            background-color: rgba(30, 6, 84, 0.75);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+
+        .name{
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: -15px;
+
+        }
+
+        .name2{
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: -15px;
+            color: #fff;
+        } 
+        
+        .job2{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <img src="johndoe.jpg" alt="image" class="img">
+            <br>
+            <br>
+            <h3 class="name">John Doe</h3>
+            <p class="job">Software Developer</p>
+        </div>
+        <div class="overlay">
+            <div class="purple">
+                <div class="title">
+                    <h3 class="name2">John Doe</h3>
+                    <p class="job2">Software Developer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var container = document.querySelector('.container');
+        const overlay = document.querySelector('.overlay');
+        const content = document.querySelector('.content');
+        container.addEventListener('mouseenter', function () {
+            content.style.display = "none";
+            overlay.style.display = "block";
+        })
+
+        container.addEventListener('mouseleave', function() {
+            content.style.display = "block"
+            overlay.style.display = "none";
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome</title>
+    <style>
+        body{
+            font-family:'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input{
+            width: 35%;
+            padding: 10px;
+            outline: none;
+            border: 2px solid #1a74e5;
+            color: #1a74e5;
+        }
+
+        h2, p, span{
+            color: #222;
+            text-align: center;
+        }
+
+        button{
+            padding: 10px;
+            outline: none;
+            border: 1px solid #1a74e5;
+            color: white;
+            background: #1a74e5;
+        }
+
+        button:hover{
+            background: #1666c7;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter a word in the input box to check if it is a palindrome</h2>
+    <p>A Palindrome is a word, verse, sentence, or number that, ignoring special characters reads the same backward and forward.</p>
+    <span>The input borders becomes green if the word you entered is a palindrome. It becomes red otherwise.</span>
+    <br>
+    <input type="text" autofocus required placeholder="Type in a word..." id="input">
+    <br>
+    <button onclick="checkPalindrome()">Check Palindrome</button>
+
+    <script>
+        function checkPalindrome() {
+            var str = document.getElementById('input').value;
+            const regex = /[\W_]/g;
+            const cleaned = str.toLowerCase().replace(regex, '');
+            const len = cleaned.length;
+
+            for (let i = 0; i < len / 2; i++){
+                console.log("Checking...")
+                if (cleaned[i] !== cleaned[len - 1 - i]) {
+                    document.getElementById('input').style.border = "1px solid red";
+                    return false;
+                }else{
+                    document.getElementById('input').style.border = "1px solid green";
+                }
+            }
+            return true;
+        };   
+    </script>
+</body>
+</html>

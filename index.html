@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Loop Example</title>
+    <style>
+
+        #box{
+            width: 100px;
+            height: 50px;
+            padding: 15px;
+            border: 2px solid purple;
+            margin: 50px auto;
+            border-radius: 20px;
+        }
+
+        #alert{
+            width: 100%;
+            height: 30px;
+            background: #37bf;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            text-align: center;
+            padding: 5px;
+        }
+
+        button{
+            color: #fff;
+            background: purple;
+            padding: 10px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        h2{
+            color: rgb(228, 43, 228);
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome Zainab,</h2>
+
+    <div id="alert"></div>
+    <div id="box"></div>
+
+    <button onclick=deposit()>Deposit $10</button>
+    <br>
+    <button onclick=withdraw()>Withdraw $10</button>
+
+    <script>
+        var balance = 0;
+        var alert = document.getElementById('alert');
+        var box = document.getElementById('box');
+        function deposit () {
+            var transaction = {
+                type: 'deposit',
+                payload: 10
+            }
+
+            balance += 10
+            box.innerHTML = '$' + balance
+            console.log(transaction)
+
+            alert.innerHTML = 'Awesome, you have just deposited $10'
+            alert.style.backgroundColor = "#37bf21"
+            alert.style.display = 'block'
+
+            setTimeout(() => {alert.style.display = "none"}
+            ,1000)
+            
+        }
+
+        function withdraw() {
+            var transaction = {
+                type: 'withdrawal',
+                payload: -10
+            }
+
+            balance -= 10
+            box.innerHTML = '$' + balance
+            console.log(transaction)
+
+            alert.innerHTML = 'Awesome, you have just withdrawn $10'
+            alert.style.backgroundColor = "red"
+            alert.style.display = 'block'
+
+            setTimeout(() => {alert.style.display = "none"}
+            ,1000)
+            
+        }
+
+    </script>
+</body>
+</html>

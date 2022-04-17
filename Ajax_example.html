@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding-top: 60px;
+            text-align: center;
+            background-color: powderblue;
+        }
+
+        div.container{
+            width: 50%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        input{
+            width: 30%;
+            padding: 8px;
+            outline: none;
+            border: none;
+        }
+
+        div.buttons{
+            width: 45%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+            
+        button{
+            padding: 7px;
+            border: none;
+            outline: none;
+        }
+
+        ul{
+            width: 50%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        li{
+            background-color: #fff;
+            width: 90%;
+            padding: 7px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            div.container{
+                width: 90%;
+            }
+
+            input, div.buttons, ul{
+                width: 80%;
+            }
+
+            div.buttons{
+                flex-direction:column;
+                justify-content: space-between;
+            }
+
+            button{
+                width: 60%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input id="todo-input" type="text" autofocus required placeholder="Enter tasks here...">
+        <br>
+        <div class="buttons">
+            <button id="add-item">Add List Item</button>
+            <button id="update-item">Update First Item</button>
+        </div>
+        <ul id="todo-list">
+
+        </ul>
+    </div>
+    <script>
+        var list = document.getElementById('todo-list');
+        var input = document.getElementById('todo-input');
+        var add = document.getElementById('add-item');
+        var update = document.getElementById('update-item')
+
+        var currentInputValue = '';
+        input.addEventListener('input', function(e) {
+            currentInputValue = e.target.value;
+        }); 
+
+        input.addEventListener('keyup', function(e) {
+            if (e.keyCode === 13){
+                addListItem();
+
+                input.value = " ";
+            }
+        });
+
+        // function createNewNode() {
+        //     var newListElement = document.createElement('li');
+        //     var textNode = document.createTextNode(currentInputValue);
+        //     newListElement.appendChild(textNode);
+        //     newListElement.id = "item" + (list.childElementCount + 1);
+
+        //     return newListElement;
+        // }
+
+        
+
+        // add.addEventListener('click', addListItem);
+        add.addEventListener('click', createTODOItemAtBE);
+
+        function addListItem() {
+            if (currentInputValue !== undefined && currentInputValue !== null && currentInputValue !== '' ){
+                var newListElement = createNewNode();
+
+                list.appendChild(newListElement);
+                console.log(list.childElementCount);
+
+                input.value = " ";
+            }
+        }
+
+        update.addEventListener('click', function() {
+            var firstElement = list.firstElementChild;
+            var newListElement = createNewNode();
+
+            list.replaceChild(newListElement, firstElement);
+
+            input.value = " ";
+        })
+
+        function createNewNodeDynamically(id, title) {
+            var newListElement = document.createElement('li');
+            var textNode = document.createTextNode(title);
+            newListElement.appendChild(textNode);
+            newListElement.id = id;
+
+            return newListElement;
+        }
+
+        function getTODOItemFromBE() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        console.log('Response received');
+                        console.log(this.responseText); 
+                        var response = JSON.parse(this.responseText);
+                        for(var i = 0; i < 10; i++){
+                            list.appendChild(createNewNodeDynamically(response[i].id, response[i].title));
+                        }
+                    } else {
+                        console.log('call failed')
+                    }                 
+                }
+            }
+            http.open('GET', 'https://jsonplaceholder.typicode.com/todos', true);
+            http.send();
+        }
+
+        // getTODOItemFromBE()
+
+        function createTODOItemAtBE() {
+            //alert('Called');
+            var http = new XMLHttpRequest();
+            http.open('POST','https://jsonplaceholder.typicode.com/todos', true);
+            http.setRequestHeader('Content-Type', 'application/json');
+            http.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 201) {
+                    var response = JSON.parse(this.response);
+                    list.appendChild(createNewNodeDynamically(response.id, currentInputValue));
+                } else{
+                    console.log(response);
+                }
+            }
+            var data = JSON.stringify({
+                // "userId" : 1,
+                // "id" : 1,
+                "title" : currentInputValue,
+                "completed" : false
+            });
+            http.send(data);
+            input.value = "";
+        }
+
+        // OOP Example
+        /* var person = {
+            name: 'Zainab',
+            yearOfBirth: '2001',
+            job: 'Developer'
+        }
+
+        function Person(pName, pYearOfBirth, pJob) {
+            this.name = pName;
+            this.yearOfBirth = pYearOfBirth;
+            this.job = pJob;
+
+            this.calculateAge = function() {
+                return 2021 - this.yearOfBirth;
+            }
+        }
+
+        var person1 = new Person('Ajoke', 1998, 'Lawyer');
+
+        var box = document.getElementById('box');
+        var text = person1.name + ' is a ' + person1.job + '<br>' + 'She is ' + person1.calculateAge();
+        console.log(person1);
+
+        box.innerHTML = text;
+
+         */
+    </script>
+</body>
+</html>
